@@ -1,0 +1,1468 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>C Crash Course</title>
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+    <link rel="stylesheet" href="_static/handouts-sphinx.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="page-wrapper">
+    <div id="page-sidebar">
+        <header>
+            <p class="project">Hackbright Engineering June 2018</p>
+
+            <p class="title">C Crash Course</p>
+
+            <p class="backlink"><a href="/"> &laquo; Back to Homepage</a></p>
+
+        </header>
+        <div id="toc">
+            <ul>
+<li><a class="reference internal" href="#">C Crash Course</a><ul>
+<li><a class="reference internal" href="#hello-world">Hello World</a><ul>
+<li><a class="reference internal" href="#who-am-i">Who am I?</a></li>
+<li><a class="reference internal" href="#id1">Hello World</a></li>
+<li><a class="reference internal" href="#running-at-command-line">Running at command line</a></li>
+<li><a class="reference internal" href="#comparison">Comparison</a></li>
+<li><a class="reference internal" href="#compilation-example">Compilation Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-syntax">Basic Syntax</a><ul>
+<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#literals">Literals</a></li>
+<li><a class="reference internal" href="#declarations">Declarations</a></li>
+<li><a class="reference internal" href="#operators">Operators</a></li>
+<li><a class="reference internal" href="#type-casting">Type Casting</a></li>
+<li><a class="reference internal" href="#increment-decrement">Increment / Decrement</a></li>
+<li><a class="reference internal" href="#assignment">Assignment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-flow">Control Flow</a><ul>
+<li><a class="reference internal" href="#statement-and-block">Statement and Block</a></li>
+<li><a class="reference internal" href="#conditionals">Conditionals</a></li>
+<li><a class="reference internal" href="#switch">Switch</a></li>
+<li><a class="reference internal" href="#loops">Loops</a></li>
+<li><a class="reference internal" href="#break-continue">Break / Continue</a></li>
+<li><a class="reference internal" href="#goto">Goto</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#general-structure">General Structure</a></li>
+<li><a class="reference internal" href="#multiple-files">Multiple Files</a></li>
+<li><a class="reference internal" href="#global-variables">Global Variables</a></li>
+<li><a class="reference internal" href="#scope">Scope</a></li>
+<li><a class="reference internal" href="#static-variables">Static Variables</a></li>
+<li><a class="reference internal" href="#block-scope">Block Scope</a></li>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
+<li><a class="reference internal" href="#recursion">Recursion</a></li>
+<li><a class="reference internal" href="#preprocessor">Preprocessor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pointers-and-arrays">Pointers and Arrays</a><ul>
+<li><a class="reference internal" href="#pointers">Pointers</a></li>
+<li><a class="reference internal" href="#pointers-and-functions">Pointers and Functions</a></li>
+<li><a class="reference internal" href="#id2">Pointers and Arrays</a></li>
+<li><a class="reference internal" href="#character-pointers">Character Pointers</a></li>
+<li><a class="reference internal" href="#other-uses">Other Uses</a></li>
+<li><a class="reference internal" href="#command-line-arguments">Command Line Arguments</a></li>
+<li><a class="reference internal" href="#function-pointers">Function Pointers</a></li>
+<li><a class="reference internal" href="#complicated-declarations">Complicated Declarations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#structures">Structures</a><ul>
+<li><a class="reference internal" href="#id3">Structures</a></li>
+<li><a class="reference internal" href="#structure-pointers">Structure Pointers</a></li>
+<li><a class="reference internal" href="#nested-structures">Nested Structures</a></li>
+<li><a class="reference internal" href="#typedef">typedef</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#i-o">I/O</a><ul>
+<li><a class="reference internal" href="#standard-i-o">Standard I/O</a></li>
+<li><a class="reference internal" href="#formatted-i-o">Formatted I/O</a></li>
+<li><a class="reference internal" href="#file-access">File Access</a></li>
+<li><a class="reference internal" href="#memory-management">Memory Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#operating-system-interface">Operating System Interface</a><ul>
+<li><a class="reference internal" href="#file-descriptors">File Descriptors</a></li>
+<li><a class="reference internal" href="#low-level-i-o">Low Level I/O</a></li>
+<li><a class="reference internal" href="#some-other-system-calls">Some Other System calls</a></li>
+<li><a class="reference internal" href="#memory-allocation">Memory Allocation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-study">Further Study</a><ul>
+<li><a class="reference internal" href="#what-we-left-out">What we left out</a></li>
+<li><a class="reference internal" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+    <div id="page-content">
+        
+  <div class="section" id="c-crash-course">
+<h1>C Crash Course</h1>
+<div class="section" id="hello-world">
+<h2>Hello World</h2>
+<div class="section" id="who-am-i">
+<h3>Who am I?</h3>
+<ul class="simple">
+<li>self-taught Python programmer</li>
+<li>teacher at Hackbright Academy</li>
+<li>likes language internals</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Hello World</h3>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">hello.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><cite>printf</cite> is &#8220;imported&#8221; from <em>stdio</em></li>
+<li><cite>main</cite> is special</li>
+<li><cite>main</cite> takes <code class="docutils literal"><span class="pre">void</span></code></li>
+<li><cite>main</cite> returns <cite>int</cite></li>
+<li>{ }</li>
+<li>;</li>
+</ul>
+</div>
+<div class="section" id="running-at-command-line">
+<h3>Running at command line</h3>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc hello.c
+$ ./a.out
+Hello World
+$
+</pre></div>
+</div>
+<p>Newline must be explicit</p>
+</div>
+<div class="section" id="comparison">
+<h3>Comparison</h3>
+<div class="compare docutils container">
+<div class="docutils container">
+<p>Python</p>
+<ul class="simple">
+<li>dynamic typing</li>
+<li>compiles to byte code</li>
+<li>run by virtual machine</li>
+</ul>
+</div>
+<div class="docutils container">
+<p>C</p>
+<ul class="simple">
+<li>static typing</li>
+<li>compiles to machine code</li>
+<li>run by CPU</li>
+</ul>
+</div>
+</div>
+<p>Standard implementation of Python - &#8220;CPython&#8221; - is written in C.</p>
+</div>
+<div class="section" id="compilation-example">
+<h3>Compilation Example</h3>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>compiles to</p>
+<div class="highlight-asm"><div class="highlight"><pre><span></span><span class="nf">addiu</span>   <span class="no">$sp</span><span class="p">,</span><span class="no">$sp</span><span class="p">,-</span><span class="mi">8</span>
+<span class="nf">sw</span>      <span class="no">$fp</span><span class="p">,</span><span class="mi">4</span><span class="p">(</span><span class="no">$sp</span><span class="p">)</span>
+<span class="nf">move</span>    <span class="no">$fp</span><span class="p">,</span><span class="no">$sp</span>
+<span class="nf">sw</span>      <span class="no">$4</span><span class="p">,</span><span class="mi">8</span><span class="p">(</span><span class="no">$fp</span><span class="p">)</span>
+<span class="nf">lw</span>      <span class="no">$2</span><span class="p">,</span><span class="mi">8</span><span class="p">(</span><span class="no">$fp</span><span class="p">)</span>
+<span class="nf">movz</span>    <span class="no">$31</span><span class="p">,</span><span class="no">$31</span><span class="p">,</span><span class="no">$0</span>
+<span class="nf">nop</span>
+<span class="nf">addiu</span>   <span class="no">$2</span><span class="p">,</span><span class="no">$2</span><span class="p">,</span><span class="mi">1</span>
+<span class="nf">move</span>    <span class="no">$sp</span><span class="p">,</span><span class="no">$fp</span>
+<span class="nf">lw</span>      <span class="no">$fp</span><span class="p">,</span><span class="mi">4</span><span class="p">(</span><span class="no">$sp</span><span class="p">)</span>
+<span class="nf">addiu</span>   <span class="no">$sp</span><span class="p">,</span><span class="no">$sp</span><span class="p">,</span><span class="mi">8</span>
+<span class="nf">j</span>       <span class="no">$31</span>
+<span class="nf">nop</span>
+</pre></div>
+</div>
+<p>No variables!</p>
+</div>
+</div>
+<div class="section" id="basic-syntax">
+<h2>Basic Syntax</h2>
+<div class="section" id="variables">
+<h3>Variables</h3>
+<ul class="simple">
+<li>lower snake case</li>
+<li>historically, very short</li>
+<li>but you can be more descriptive</li>
+<li><strong>fixed</strong> memory location</li>
+<li>But how much memory?</li>
+</ul>
+</div>
+<div class="section" id="types">
+<h3>Types</h3>
+<p>Basic Types</p>
+<ul class="simple">
+<li><cite>char</cite> - one byte, ie, small integer</li>
+<li><cite>int</cite> - 4 bytes (Python3 <cite>int</cite> has arbitrary size)</li>
+<li><cite>float</cite> - 4 bytes</li>
+<li><cite>double</cite> - double precision floating point</li>
+</ul>
+<p>Modifiers for integer types</p>
+<ul class="simple">
+<li><cite>signed</cite> - negative to positive</li>
+<li><cite>unsigned</cite> - zero to positive</li>
+</ul>
+<p>Exact sizes and ranges somewhat platform dependent :(</p>
+<p>Because type corresponds to memory size, be careful to stay within bounds:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(low</span> <span class="pre">+</span> <span class="pre">high)</span> <span class="pre">/</span> <span class="pre">2</span></code> may give gibberish</li>
+<li><code class="docutils literal"><span class="pre">low</span> <span class="pre">+</span> <span class="pre">(high</span> <span class="pre">-</span> <span class="pre">low)</span> <span class="pre">/</span> <span class="pre">2</span></code> is safe</li>
+<li>This bug went undetected in Java&#8217;s binary search until 2006!</li>
+<li><cite>sizeof</cite> operator gives size in bytes</li>
+</ul>
+</div>
+<div class="section" id="literals">
+<h3>Literals</h3>
+<p>a <cite>char</cite> is an integer but written as a <em>single</em> quoted character</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'0'</span></code> is same as 48 (ASCII value)</li>
+<li><code class="docutils literal"><span class="pre">'0'</span></code> is conventional and preferred</li>
+<li><cite>char</cite> most often used for textual stuff, not math</li>
+<li>special characters begin with , e.g. <code class="docutils literal"><span class="pre">'\\n'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'\0'</span></code> is null character (equal to 0)</li>
+</ul>
+<p>strings are denoted by <em>double</em> quotes</p>
+<ul class="simple">
+<li>stored in memory as array of characters</li>
+<li><code class="docutils literal"><span class="pre">'\0'</span></code> at the end</li>
+<li><code class="docutils literal"><span class="pre">&quot;a&quot;</span></code> is <strong>not</strong> same as <code class="docutils literal"><span class="pre">'a'</span></code> !</li>
+</ul>
+<p><cite>enum</cite> for autoincrementing constants</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">enum.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">enum</span> <span class="n">fruits</span> <span class="p">{</span> <span class="n">APPLE</span><span class="p">,</span> <span class="n">BERRY</span><span class="p">,</span> <span class="n">CHERRY</span> <span class="p">};</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">APPLE</span><span class="p">,</span> <span class="n">BERRY</span><span class="p">,</span> <span class="n">CHERRY</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc enum.c
+$ ./a.out
+0 1 2
+</pre></div>
+</div>
+<p>(You can also explicitly assign values.)</p>
+</div>
+<div class="section" id="declarations">
+<h3>Declarations</h3>
+<p>Variables must be declared (and initialized) before use.</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">int</span> <span class="pre">x,</span> <span class="pre">y;</span></code>
+<code class="docutils literal"><span class="pre">char</span> <span class="pre">msg[]</span> <span class="pre">=</span> <span class="pre">&quot;hello&quot;;</span></code>
+<code class="docutils literal"><span class="pre">const</span> <span class="pre">double</span> <span class="pre">pi</span> <span class="pre">=</span> <span class="pre">3.1415;</span></code></div></blockquote>
+<p><cite>const</cite>: value can&#8217;t change (compiler can enforce)</p>
+<p>Global variables</p>
+<ul class="simple">
+<li>initialized exactly once</li>
+<li><em>may</em> need to be declared within function with <cite>extern</cite> keyword</li>
+</ul>
+<p>Local variables</p>
+<ul class="simple">
+<li>initialized wth each function call</li>
+<li>value does not persist</li>
+</ul>
+</div>
+<div class="section" id="operators">
+<h3>Operators</h3>
+<p>Arithmetic Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code>, <code class="docutils literal"><span class="pre">%</span></code></li>
+<li><code class="docutils literal"><span class="pre">/</span></code> is integer division</li>
+</ul>
+<p>Relational Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&gt;</span></code>, <code class="docutils literal"><span class="pre">&gt;=</span></code>, <code class="docutils literal"><span class="pre">&lt;</span></code>, <code class="docutils literal"><span class="pre">&lt;=</span></code></li>
+<li><code class="docutils literal"><span class="pre">==</span></code>, <code class="docutils literal"><span class="pre">!=</span></code></li>
+</ul>
+<p>Logical Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&amp;&amp;</span></code> (and), <code class="docutils literal"><span class="pre">||</span></code> (or), <code class="docutils literal"><span class="pre">!</span></code> (not)</li>
+</ul>
+<ul class="simple">
+<li>Boolean expression evaluates to 1 (true) or 0 (false)</li>
+<li><code class="docutils literal"><span class="pre">!</span></code> turns 0 to 1, and nonzero to 0</li>
+</ul>
+<p>compound expressions separated by <code class="docutils literal"><span class="pre">&amp;&amp;</span></code>/<code class="docutils literal"><span class="pre">||</span></code></p>
+<ul class="simple">
+<li>evaluated left to right</li>
+<li>with short circuit</li>
+</ul>
+<p><strong>not</strong> true in general</p>
+<ul class="simple">
+<li>in <code class="docutils literal"><span class="pre">f(x)</span> <span class="pre">+</span> <span class="pre">g(x)</span></code>, <cite>f</cite> or <cite>g</cite> may be evaluated first</li>
+</ul>
+</div>
+<div class="section" id="type-casting">
+<h3>Type Casting</h3>
+<p>Usually, C automatically casts type</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1.0</span></code> is a double float</li>
+<li><code class="docutils literal"><span class="pre">sqrt(2)</span></code> works</li>
+</ul>
+<p>To explicitly cast:</p>
+<blockquote>
+<div><p><cite>(type) expression</cite></p>
+<p>e.g., <code class="docutils literal"><span class="pre">(float)</span> <span class="pre">5</span> <span class="pre">/</span> <span class="pre">2</span></code> evaluates to 2.5</p>
+</div></blockquote>
+</div>
+<div class="section" id="increment-decrement">
+<h3>Increment / Decrement</h3>
+<p><code class="docutils literal"><span class="pre">++</span></code> increases variable by 1</p>
+<p><code class="docutils literal"><span class="pre">--</span></code> decresses variable by 1</p>
+<p>Can be either prefix or postfix</p>
+<ul class="simple">
+<li>prefix: change value then get it</li>
+<li>postfix: get value then change it</li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">prefix_postfix.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">++</span><span class="n">x</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">++</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc prefix_postfix.c
+$ ./a.out
+b
+b
+b
+c
+$
+</pre></div>
+</div>
+<p>Often idiomatic (but confusing) to increment within expression.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">ones.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ones</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll">    <span class="n">ones</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="o">//</span> <span class="o">++</span><span class="n">i</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">work</span>
+</span>  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ones</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc ones.c
+$ ./a.out
+0: 1
+1: 1
+2: 1
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="assignment">
+<h3>Assignment</h3>
+<p>Assignment Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">3</span></code> same as <code class="docutils literal"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">3</span></code></li>
+<li>similarly, <code class="docutils literal"><span class="pre">-=</span></code>, <code class="docutils literal"><span class="pre">*=</span></code>, <code class="docutils literal"><span class="pre">/=</span></code>, etc.</li>
+<li>in Python, <code class="docutils literal"><span class="pre">+=</span></code> is <strong>not</strong> same as reassignment!</li>
+</ul>
+<p>Assignment Expressions</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">printf(&quot;%d\n&quot;,</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">42)</span></code> outputs 42</li>
+<li>common pattern: <code class="docutils literal"><span class="pre">while</span> <span class="pre">((char</span> <span class="pre">=</span> <span class="pre">getchar())</span> <span class="pre">!=</span> <span class="pre">EOF)</span></code></li>
+<li>nasty bug: <code class="docutils literal"><span class="pre">if</span> <span class="pre">(x=1)</span></code> <strong>always</strong> true</li>
+<li>coming to Python 3.8 (<code class="docutils literal"><span class="pre">:=</span></code>)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="control-flow">
+<h2>Control Flow</h2>
+<div class="section" id="statement-and-block">
+<h3>Statement and Block</h3>
+<ul class="simple">
+<li>code is made of statements</li>
+<li>each statement ended by <code class="docutils literal"><span class="pre">;</span></code></li>
+<li>block is multiple statements within <code class="docutils literal"><span class="pre">{</span> <span class="pre">}</span></code></li>
+<li>block is also a statement</li>
+<li>no semicolon after block</li>
+</ul>
+</div>
+<div class="section" id="conditionals">
+<h3>Conditionals</h3>
+<p>General Syntax</p>
+<pre class="literal-block">
+if (<em>expression</em>)
+    <em>statement</em>
+
+else if (<em>expression</em>)
+    <em>statement</em>
+
+...
+
+else
+    <em>statement</em>
+</pre>
+<ul class="simple">
+<li>evalutation halts when an expression is true (nonzero)</li>
+<li><code class="docutils literal"><span class="pre">else</span></code> is optional</li>
+</ul>
+<p>Note that <code class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></code> is not a separate keyword like <code class="docutils literal"><span class="pre">elif</span></code>.
+The <code class="docutils literal"><span class="pre">if</span></code> simply begins another conditional.</p>
+</div>
+<div class="section" id="switch">
+<h3>Switch</h3>
+<pre class="literal-block">
+switch (<em>expression</em>) {
+    case <em>const-expr</em>: <em>statements</em>
+    case <em>const-expr</em>: <em>statements</em>
+    ...
+    default: <em>statements</em>
+}
+</pre>
+<ul class="simple">
+<li>expression must be integer valued</li>
+<li>case values must be unique</li>
+<li>optional <code class="docutils literal"><span class="pre">default</span></code> executes if no condition is met</li>
+<li>execution starts where expression matches value</li>
+<li>continues <strong>until</strong> end or <code class="docutils literal"><span class="pre">break</span></code></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">case.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">switch</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">case</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;one</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="n">case</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;two</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="n">case</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;three</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="n">case</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;four</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc case.c
+$ ./a.out
+two
+three
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="loops">
+<h3>Loops</h3>
+<p><cite>while</cite> loop runs as long as expression is nonzero</p>
+<pre class="literal-block">
+while (<em>expression</em>)
+    <em>statement</em>
+</pre>
+<p><cite>for</cite> loop</p>
+<pre class="literal-block">
+for (expr1; expr2; expr3)
+    <em>statement</em>
+</pre>
+<p>is equivalent to</p>
+<pre class="literal-block">
+<em>expr1</em>;
+while (<em>expr2</em>) {
+    <em>statement</em>
+    <em>expr3</em>
+}
+</pre>
+<p><cite>for</cite> loop is idiomatic for iterating thru array</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">for(;;){</span> <span class="pre">...</span> <span class="pre">}</span></code> is an infinte loop!</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">do-while</span></code> loop</p>
+<pre class="literal-block">
+do
+    <em>statement</em>
+while (<em>expression</em>);
+</pre>
+<p><cite>do-while</cite> is relatively uncommon</p>
+</div>
+<div class="section" id="break-continue">
+<h3>Break / Continue</h3>
+<p>Same as Python! Within a loop, <code class="docutils literal"><span class="pre">break</span></code> immediately exits the loop,
+and <code class="docutils literal"><span class="pre">continue</span></code> goes back to the top of the loop.</p>
+</div>
+<div class="section" id="goto">
+<h3>Goto</h3>
+<p>You can label code and jump to a label.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">goto.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">goto</span> <span class="n">yay</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;hello</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+
+<span class="n">yay</span><span class="p">:</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;world</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc goto.c
+$ ./a.out
+world
+$
+</pre></div>
+</div>
+<p>&#8220;Although we are not dogmatic about the matter, it does seem
+that <cite>goto</cite> statements should be used rarely, if at all.&#8221;</p>
+<p>&#8211; K&amp;R</p>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions</h2>
+<div class="section" id="general-structure">
+<h3>General Structure</h3>
+<pre class="literal-block">
+<em>return-type</em> <em>name*(*parameters</em>) {
+    <em>declarations and statements</em>
+}
+</pre>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">return</span></code> returns value (or nothing)</li>
+<li>if no <code class="docutils literal"><span class="pre">return</span></code> then returns nothing</li>
+<li><code class="docutils literal"><span class="pre">void</span></code> denotes no return or no parameter</li>
+<li><strong>no</strong> nested functions in C, ie, not first class object</li>
+</ul>
+</div>
+<div class="section" id="multiple-files">
+<h3>Multiple Files</h3>
+<p>C program is a bunch of variable declarations and functions.
+Source code can be split among multiple files.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">half_main.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">double</span> <span class="n">half</span><span class="p">(</span><span class="n">double</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">half</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">half.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">half</span><span class="p">(</span><span class="n">double</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc half_main.c half.c
+$ ./a.out
+2.500000
+$
+</pre></div>
+</div>
+<p>The function prototype <code class="docutils literal"><span class="pre">double</span> <span class="pre">half(double)</span></code> is necessary, otherwise the
+compiler seeing a function used for the first time assumes it has
+return type <code class="docutils literal"><span class="pre">int</span></code>.</p>
+<p>This the main purpose of <em>header</em> (.h) files - get all the prototypes and
+other global declarations out of the way.</p>
+</div>
+<div class="section" id="global-variables">
+<h3>Global Variables</h3>
+<ul class="simple">
+<li>AKA <em>external</em> variables</li>
+<li>defined outside of any function</li>
+<li>useful for shared information among functions</li>
+<li>use with caution, for the usual reasons</li>
+</ul>
+</div>
+<div class="section" id="scope">
+<h3>Scope</h3>
+<p>Where can a variable be used?</p>
+<ul class="simple">
+<li>local (&#8220;automatic&#8221;) variable: within the same function</li>
+<li>parameters become local variables</li>
+<li>global (&#8220;external&#8221;) variable: within the same file</li>
+<li><code class="docutils literal"><span class="pre">extern</span></code> declaration may be necessary</li>
+<li>when local and global variable has same name, local wins</li>
+</ul>
+</div>
+<div class="section" id="static-variables">
+<h3>Static Variables</h3>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">static</span></code> declaration before global variable: visible within file only</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">static</span></code> local variable: persist between function calls</li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">counter.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">counter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">static</span> <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc counter.c
+$ ./a.out
+1
+2
+3
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="block-scope">
+<h3>Block Scope</h3>
+<p>Variable can be local to <em>any</em> block, not just function block.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">block_scope.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gcc block_scope.c
+$ ./a.out
+3
+2
+$
+</pre></div>
+</div>
+<p>Probably should exploit this sparingly...</p>
+</div>
+<div class="section" id="initialization">
+<h3>Initialization</h3>
+<ul class="simple">
+<li>global variables default to zero</li>
+<li>local vaiables must be initialized, or have garbage values</li>
+</ul>
+<p>Array can be initialized with a literal</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">nums[]</span> <span class="pre">=</span> <span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3};</span></code></li>
+</ul>
+<p>Strings are arrays of characters</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">char</span> <span class="pre">message[]</span> <span class="pre">=</span> <span class="pre">&quot;hello&quot;;</span></code></li>
+</ul>
+<p>is short for</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">char</span> <span class="pre">message[]</span> <span class="pre">=</span> <span class="pre">{'h',</span> <span class="pre">'e',</span> <span class="pre">'l',</span> <span class="pre">'l',</span> <span class="pre">'o',</span> <span class="pre">'\0'};</span></code></li>
+</ul>
+</div>
+<div class="section" id="recursion">
+<h3>Recursion</h3>
+<p>Yes.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">fib.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">fib</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+    <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc fib.c
+$ ./a.out
+1 1 2 3 5 8 13 21 34 55
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="preprocessor">
+<h3>Preprocessor</h3>
+<p>C processor manipulates souce code before compilation.</p>
+<p><cite>#include</cite> injects content of another file</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;stdio.h&gt;</span></code> adds standard IO library headers</li>
+<li><code class="docutils literal"><span class="pre">#include</span> <span class="pre">&quot;my_headers.h&quot;</span></code> adds file from current directory</li>
+</ul>
+<p><cite>#define</cite> creates substitution rule</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">#define</span> <span class="pre">MAX</span> <span class="pre">1000</span></code> substitutes 1000 wherever MAX occurs</li>
+<li>most often used to define constants</li>
+<li>can also take arguments</li>
+</ul>
+<p><cite>#ifndef</cite> and <cite>#endif</cite> often wrap a header file</p>
+<ul class="simple">
+<li>make sure include only once</li>
+</ul>
+<pre class="literal-block">
+#ifndef MY_HEADER_H
+#define MY_HEADER_H
+
+<em>header content goes here</em>
+
+#endif
+</pre>
+<ul class="simple">
+<li>pattern is called &#8220;#include guards&#8221;</li>
+</ul>
+<p>Output preprocessed source code with <cite>-E</cite> command line option.</p>
+</div>
+</div>
+<div class="section" id="pointers-and-arrays">
+<h2>Pointers and Arrays</h2>
+<div class="section" id="pointers">
+<h3>Pointers</h3>
+<p>A pointer is a variable whose value is the <strong>address</strong> of another variable.</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">pointer.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">x</span><span class="p">;</span>
+  <span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;address %p contains </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc pointer.c
+$ ./a.out
+address 0x7ffee1317858 contains 42
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li>pointers are declared with <code class="docutils literal"><span class="pre">*</span></code></li>
+<li><code class="docutils literal"><span class="pre">*</span></code> operator also gives pointed-at value (dereferencing)</li>
+<li><code class="docutils literal"><span class="pre">&amp;</span></code> operator gives address of a variable</li>
+<li>a pointer may be assigned zero (or <code class="docutils literal"><span class="pre">NULL</span></code> conventionally)</li>
+</ul>
+<p>Pointers make possible dynamic data structures.</p>
+</div>
+<div class="section" id="pointers-and-functions">
+<h3>Pointers and Functions</h3>
+<p>Because C functions pass by value, pointers allow &#8220;in-place&#8221; changes.</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">triple.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">void</span> <span class="n">triple</span><span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">triple</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc triple.c
+$ ./a.out
+15
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Pointers and Arrays</h3>
+<p>Arrays and pointers are suprisingly close.</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">pointer_and_array.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+  <span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">arr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ $ gcc pointer_and_array.c
+3
+3
+3
+3
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li>adding integer to pointer advances to next element</li>
+<li>one reason a pointer is to a specific type</li>
+<li>name of array is alias for address of first element</li>
+</ul>
+<p>Because addresses are equally sized, can freely cast pointers</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">little_endian.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">unsigned</span> <span class="n">long</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">256</span> <span class="o">*</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">n</span><span class="p">;</span>
+
+  <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sizeof</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">i</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc little_endian.c
+$ ./a.out
+0 0 1 0 0 0 0 0
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li>In most computers, integer digits from small to large (&#8220;little-endian&#8221;).</li>
+<li><code class="docutils literal"><span class="pre">void</span> <span class="pre">*p;</span></code> declares pointer to nothing (yet)</li>
+</ul>
+<p>When passing array name to function, it is the address that is passed.</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">print_array.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">void</span> <span class="n">print_array</span><span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="nb">int</span> <span class="nb">len</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+  <span class="n">print_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc print_array.c
+$ ./a.out
+5 4 3 2 1
+$
+</pre></div>
+</div>
+<p>This is known as &#8220;array decay&#8221;.</p>
+</div>
+<div class="section" id="character-pointers">
+<h3>Character Pointers</h3>
+<p>Since strings are arrays, functions that take a string receive pointer.</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">string_copy.c (adapted from K&amp;R, p.106)</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">void</span> <span class="n">string_copy</span><span class="p">(</span><span class="n">char</span> <span class="o">*</span><span class="n">source</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">((</span><span class="o">*</span><span class="n">source</span><span class="o">++</span> <span class="o">=</span> <span class="o">*</span><span class="n">target</span><span class="o">++</span><span class="p">))</span>
+    <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="n">original</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
+  <span class="n">char</span> <span class="n">copy</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="n">string_copy</span><span class="p">(</span><span class="n">copy</span><span class="p">,</span> <span class="n">original</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">copy</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc string_copy.c
+$ ./a.out
+hello
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-uses">
+<h3>Other Uses</h3>
+<p>Since pointers are variables, can make array of pointers. This allows
+for memory efficient data manipulation, such as sorting.
+(Also how Python lists are implemented!)</p>
+<p>Similarly, can make array of arrays, or multi-dimensional
+array. Probably mostly used in numerical applications.</p>
+</div>
+<div class="section" id="command-line-arguments">
+<h3>Command Line Arguments</h3>
+<p>Command line arguments can be passed to <cite>main</cite> function
+with the signature</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">int</span> <span class="pre">main(int</span> <span class="pre">argc,</span> <span class="pre">char</span> <span class="pre">*argv[])</span></code></div></blockquote>
+<ul class="simple">
+<li><cite>argc</cite> (argument count) is number of command line arguments</li>
+<li><cite>argv</cite> (argument vector) is array of strings, ie, the arguments</li>
+<li><code class="docutils literal"><span class="pre">argv[0]</span></code> is the name of the program itself</li>
+<li><code class="docutils literal"><span class="pre">argv[argc]</span></code> is NULL pointer</li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">factorial.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;stdlib.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+  <span class="n">static</span> <span class="nb">int</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;error: need argument</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="p">;</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">--</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">main</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc factorial.c
+$ ./a.out 5
+120
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li><cite>static int</cite> to persist result</li>
+<li><cite>atoi</cite> converts string to integer</li>
+<li><cite>sprintf</cite> prints to string</li>
+<li>Yes, <cite>main</cite> is a function like anyother</li>
+<li>No, don&#8217;t make <cite>main</cite> recursive in real life</li>
+</ul>
+</div>
+<div class="section" id="function-pointers">
+<h3>Function Pointers</h3>
+<p>Since a function is in memory, pointer can point to it</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">function_pointer.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">add_two</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">triple</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nb">int</span> <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="nb">int</span><span class="p">);</span>
+
+  <span class="n">fp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">add_two</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="mi">42</span><span class="p">));</span>
+
+  <span class="n">fp</span> <span class="o">=</span> <span class="n">triple</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fp</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Note that <cite>&amp;</cite> and <cite>*</cite> are optional, but clarifying.</p>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc function_pointer.c
+$ ./a.out
+44
+126
+$
+</pre></div>
+</div>
+<p><cite>fp</cite> is a pointer to a function that takes <cite>int`</cite> and returns <cite>int`</cite>.
+Function pointers useful for passing small functions, e.g., a comparison
+function to a general sorting algorithm.</p>
+</div>
+<div class="section" id="complicated-declarations">
+<h3>Complicated Declarations</h3>
+<p>With arrays, pointers, and functions, declarations can get complex</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">char</span> <span class="pre">(</span> <span class="pre">*</span> <span class="pre">(</span> <span class="pre">*x</span> <span class="pre">()</span> <span class="pre">)</span> <span class="pre">[</span> <span class="pre">]</span> <span class="pre">)</span> <span class="pre">()</span></code> ???</li>
+<li>function returning pointer to array of pointer to function returning char</li>
+<li>there are rules, but barely human understandable</li>
+<li>keep it simple</li>
+</ul>
+</div>
+</div>
+<div class="section" id="structures">
+<h2>Structures</h2>
+<div class="section" id="id3">
+<p>Structures are basically classes but without methods</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">cat.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">struct</span> <span class="n">cat</span> <span class="p">{</span>
+    <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+    <span class="n">char</span> <span class="o">*</span><span class="n">greeting</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">hunger</span><span class="p">;</span>
+  <span class="p">}</span> <span class="n">grumpy</span><span class="p">;</span>
+
+  <span class="n">grumpy</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Grumpy&quot;</span><span class="p">;</span>
+  <span class="n">grumpy</span><span class="o">.</span><span class="n">greeting</span> <span class="o">=</span> <span class="s2">&quot;Meh&quot;</span><span class="p">;</span>
+  <span class="n">grumpy</span><span class="o">.</span><span class="n">hunger</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, I am </span><span class="si">%s</span><span class="s2">. My hunger is </span><span class="si">%d</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">grumpy</span><span class="o">.</span><span class="n">greeting</span><span class="p">,</span> <span class="n">grumpy</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+         <span class="n">grumpy</span><span class="o">.</span><span class="n">hunger</span><span class="p">);</span>
+
+  <span class="n">struct</span> <span class="n">cat</span> <span class="n">bub</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Lil Bub&quot;</span><span class="p">,</span> <span class="s2">&quot;Meow&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">};</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, I am </span><span class="si">%s</span><span class="s2">. My hunger is </span><span class="si">%d</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bub</span><span class="o">.</span><span class="n">greeting</span><span class="p">,</span> <span class="n">bub</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">bub</span><span class="o">.</span><span class="n">hunger</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc cat.c
+$ ./a.out
+Meh, I am Grumpy. My hunger is 80.
+Meow, I am Lil Bub. My hunger is 50.
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li><cite>struct</cite> defines a type or class</li>
+<li><code class="docutils literal"><span class="pre">cat</span></code> is (optional) <em>structure tag</em>, a short hand for { ... }</li>
+<li>variable in structure is a <em>member</em>, analogous to instance attribute</li>
+<li>you can have structures within stuctures</li>
+</ul>
+</div>
+<div class="section" id="structure-pointers">
+<h3>Structure Pointers</h3>
+<p>Like other types, structure are passed by value. May be more efficient
+to pass pointer to structure.</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">pointer_cat.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">struct</span> <span class="n">cat</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">greeting</span><span class="p">;</span>
+  <span class="nb">int</span> <span class="n">hunger</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">void</span> <span class="n">speak</span><span class="p">(</span><span class="n">struct</span> <span class="n">cat</span> <span class="o">*</span><span class="n">cp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, I am </span><span class="si">%s</span><span class="s2">. My hunger is </span><span class="si">%d</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">cp</span><span class="p">)</span><span class="o">.</span><span class="n">greeting</span><span class="p">,</span> <span class="n">cp</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+         <span class="n">cp</span><span class="o">-&gt;</span><span class="n">hunger</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">struct</span> <span class="n">cat</span> <span class="n">grumpy</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Grumpy&quot;</span><span class="p">,</span> <span class="s2">&quot;Meh&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">};</span>
+
+  <span class="n">struct</span> <span class="n">cat</span> <span class="o">*</span><span class="n">cp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">grumpy</span><span class="p">;</span>
+
+  <span class="n">speak</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><cite>pointer-&gt;member</cite> is shorthand for <cite>(*pointer).member</cite></li>
+<li>structures allow for a quasi-object oriented style</li>
+<li>array of structures store uniform data, like list of dictionaries</li>
+</ul>
+</div>
+<div class="section" id="nested-structures">
+<h3>Nested Structures</h3>
+<p>A member of a structure can be pointer to another structure (or itself),
+you can build a larger data structure out of them.</p>
+<ul class="simple">
+<li>binary search tree, with node.left and node.right</li>
+<li>hash table: collisions resolved by chaining</li>
+<li>Python objects!</li>
+</ul>
+</div>
+<div class="section" id="typedef">
+<h3>typedef</h3>
+<p>You can alias a type by using <cite>typedef</cite></p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text">typedef_cat.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">cat</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">greeting</span><span class="p">;</span>
+  <span class="nb">int</span> <span class="n">hunger</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">Cat</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="n">speak</span><span class="p">(</span><span class="n">Cat</span> <span class="o">*</span><span class="n">cp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, I am </span><span class="si">%s</span><span class="s2">. My hunger is </span><span class="si">%d</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">cp</span><span class="p">)</span><span class="o">.</span><span class="n">greeting</span><span class="p">,</span> <span class="n">cp</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+         <span class="n">cp</span><span class="o">-&gt;</span><span class="n">hunger</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">Cat</span> <span class="n">grumpy</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Grumpy&quot;</span><span class="p">,</span> <span class="s2">&quot;Meh&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">};</span>
+
+  <span class="n">Cat</span> <span class="o">*</span><span class="n">cp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">grumpy</span><span class="p">;</span>
+
+  <span class="n">speak</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li>alias appears where a variable would be</li>
+<li>conventionally uppercase (classes?)</li>
+<li>cleaner code and more semantic</li>
+</ul>
+</div>
+</div>
+<div class="section" id="i-o">
+<h2>I/O</h2>
+<div class="section" id="standard-i-o">
+<h3>Standard I/O</h3>
+<p>Input and output are not part of C language but handled by library
+functions, mostly in <cite>stdio.h</cite>.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">getchar(void)</span></code> returns one character or EOF (-1) from STDIN</li>
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">putchar(int)</span></code> sends one character to STDOUT and returns it or EOF (error)</li>
+<li>a lot of command line utilities are based on stream processing</li>
+</ul>
+</div>
+<div class="section" id="formatted-i-o">
+<h3>Formatted I/O</h3>
+<p>Formatted output with <cite>printf</cite></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">printf</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p><cite>printf</cite> returns count of characters printed</p>
+<p>common format options:</p>
+<ul class="simple">
+<li><cite>%d</cite> - integer</li>
+<li><cite>%c</cite> - char</li>
+<li><cite>%s</cite> - string</li>
+<li><cite>%f</cite> - double float</li>
+<li><cite>%p</cite> - pointer value</li>
+</ul>
+<p><cite>printf</cite> is a variadic function. Use <cite>&lt;stddarg.h&gt;</cite> library for
+implementing your own.</p>
+<p>Formatted input with <cite>scanf</cite></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">scanf</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p><cite>scanf</cite> returns number of assigned items. Arguments must be pointers!</p>
+</div>
+<div class="section" id="file-access">
+<h3>File Access</h3>
+<p>To access files, use the <cite>FILE</cite> type (a structure)</p>
+<pre class="console literal-block">
+$ gcc open_file.c
+$ ./a.out
+#include &lt;stdio.h&gt;
+
+int main(void) {
+FILE *fp = fopen(&quot;open_file.c&quot;, &quot;r&quot;);
+
+int c;
+while ((c = getc(fp)) != EOF) {
+    putc(c, stdout);
+}
+printf(&quot;n&quot;);
+fclose(fp);
+return 0;
+}
+$
+</pre>
+<ul class="simple">
+<li><cite>fopen</cite> returns pointer to FILE in read mode</li>
+<li><cite>getc</cite> gets next character from file</li>
+<li>&#8216;putc` sends character to file</li>
+<li><cite>stdin</cite>, <cite>stdout</cite>, <cite>stderr</cite> are included file pointers</li>
+<li>STDIN, STDOUT, STDERR are &#8220;file-like objects&#8221; provided by OS</li>
+<li>limit on number of open files, so <cite>fclose</cite> when done</li>
+</ul>
+</div>
+<div class="section" id="memory-management">
+<h3>Memory Management</h3>
+<p>The compiler allocates memory for variables, but often more memory
+is required during execution. For example, instantiate an object
+in Python.</p>
+<p>C provides the <cite>malloc</cite> function to dynamically allocate memory.</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">malloc_cat.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;stdlib.h&gt;</span>
+
+<span class="n">typedef</span> <span class="n">struct</span> <span class="n">cat</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+  <span class="n">char</span> <span class="o">*</span><span class="n">greeting</span><span class="p">;</span>
+  <span class="nb">int</span> <span class="n">hunger</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">Cat</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="n">speak</span><span class="p">(</span><span class="n">Cat</span> <span class="o">*</span><span class="n">cp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, I am </span><span class="si">%s</span><span class="s2">. My hunger is </span><span class="si">%d</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">-&gt;</span><span class="n">greeting</span><span class="p">,</span> <span class="n">cp</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">cp</span><span class="o">-&gt;</span><span class="n">hunger</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Cat</span> <span class="o">*</span><span class="n">cp</span><span class="p">;</span>
+    <span class="n">cp</span> <span class="o">=</span> <span class="p">(</span><span class="n">Cat</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">Cat</span><span class="p">));</span>
+
+    <span class="n">cp</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Grumpy&quot;</span><span class="p">;</span>
+    <span class="n">cp</span><span class="o">-&gt;</span><span class="n">greeting</span> <span class="o">=</span> <span class="s2">&quot;Meh&quot;</span><span class="p">;</span>
+    <span class="n">cp</span><span class="o">-&gt;</span><span class="n">hunger</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+
+    <span class="n">speak</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc malloc_cat.c
+$ ./a.out
+Meh, I am Grumpy. My hunger is 15.
+Meh, I am Grumpy. My hunger is 15.
+Meh, I am Grumpy. My hunger is 15.
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li><cite>malloc</cite> allocates takes an interger and reserves that number of bytes</li>
+<li><cite>malloc</cite> returns a pointer to void, so need to cast it</li>
+<li><cite>free</cite> takes a pointer and frees up memory it points to</li>
+<li>neglecting to free often leads to memory leak</li>
+<li>free <strong>only</strong> memory that is <cite>malloc</cite>ated!</li>
+</ul>
+</div>
+</div>
+<div class="section" id="operating-system-interface">
+<h2>Operating System Interface</h2>
+<div class="section" id="file-descriptors">
+<h3>File Descriptors</h3>
+<ul class="simple">
+<li>all input / output is thru files</li>
+<li>files include normal files and peripherals</li>
+<li>program requests file, gets a <em>file descriptor</em> integer</li>
+<li>0, 1, 2 represent STDIN, STDOUT, STDERR, respectively</li>
+<li>program communicates with OS thru special functions - <em>system calls</em></li>
+</ul>
+</div>
+<div class="section" id="low-level-i-o">
+<h3>Low Level I/O</h3>
+<div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text">readwrite.c (adapted from K&amp;R p.171)</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;unistd.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZ</span><span class="p">];</span>
+  <span class="nb">int</span> <span class="n">n</span><span class="p">;</span>
+
+  <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc readwrite.c
+$ echo &quot;hello&quot; | ./a.out
+hello
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li><cite>read</cite> and <cite>write</cite> takes file descriptor, char array, transfer size</li>
+<li>return number of bytes transferred</li>
+<li>large buffer means fewer calls (BUFSIZ is 1024)</li>
+<li><cite>unistd.h</cite> declares many system calls</li>
+</ul>
+</div>
+<div class="section" id="some-other-system-calls">
+<h3>Some Other System calls</h3>
+<ul class="simple">
+<li><cite>open</cite> - open file by name, returns descriptor</li>
+<li><cite>creat</cite> - make new file</li>
+<li><cite>close</cite> - frees up descriptor</li>
+<li><cite>unlink</cite> - removes file by name</li>
+<li><cite>lseek</cite> - changes current position in file (random access)</li>
+</ul>
+<p>Higher level I/O functions such as <cite>printf</cite> ultimately make
+system calls, which are implemented by OS.</p>
+</div>
+<div class="section" id="memory-allocation">
+<h3>Memory Allocation</h3>
+<p>How do <cite>malloc</cite> and <cite>free</cite> work? Here&#8217;s one possible way:</p>
+<ul class="simple">
+<li>blocks of memory available to program form a circular linked list</li>
+<li>each block has a header - block size, pointer to next block, etc</li>
+<li><cite>malloc</cite> traverses linked list for large enough block</li>
+<li>if found, return pointer to needed portion, remainder is new block</li>
+<li>if not found, make <em>system call</em> for additional memory and add to list</li>
+<li>system call is expensive, so request a big amount</li>
+<li><cite>free</cite> simply adds block back to list, merging if possible</li>
+</ul>
+<p>See K&amp;R (8.7) for detailed implementation. It is a <strong>masterpiece</strong>.</p>
+</div>
+</div>
+<div class="section" id="further-study">
+<h2>Further Study</h2>
+<div class="section" id="what-we-left-out">
+<h3>What we left out</h3>
+<ul class="simple">
+<li>bitwise operations - they are a thing</li>
+<li>ternary operator</li>
+<li>unions - like struct but only one value at a time</li>
+<li>bit-fields - a struct that accesses individual bits</li>
+<li>error handling - no try/except, just STDERR and fast exit</li>
+</ul>
+</div>
+<div class="section" id="where-to-go-next">
+<h3>Where to go next</h3>
+<ul class="simple">
+<li>standard library - networking, threading, etc.</li>
+<li>CPython, C extensions, ctypes, Cython, CFFI, etc.</li>
+<li>assembly</li>
+<li>C++, Go, Rust</li>
+<li>operating systems</li>
+<li>compilers!</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+    </div>
+</div>
+<script type="text/javascript" src="_static/jquery.js"></script>
+<script type="text/javascript" src="_static/underscore.js"></script>
+<script type="text/javascript" src="_static/doctools.js"></script> 
+</body>
+</html>

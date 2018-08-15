@@ -1,0 +1,742 @@
+/* TODO:
+     - table striping
+     - table col centering style
+     - looser spacing on screen
+     - responsive mode
+     - update demo
+     - hyphenation
+     - remove slide from toc where slide==section
+     */
+
+
+
+/* =============== PAGE STRUCTURE =============== */
+
+body {
+    margin: 0;
+}
+
+#toc {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    #page-wrapper {
+        display: flex;
+    }
+
+    #page-sidebar {
+        display: block;
+        width: 275px;
+        background-color: #58595B;
+        color: #ddd;
+    }
+
+    #toc {
+        display: block;
+    }
+
+}
+
+#page-sidebar > header {
+    padding: 1em;
+    text-align: center;
+    color: white;
+    background-color: #EE1431;
+}
+
+#page-sidebar a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#page-sidebar .project {
+    font-size: 90%;
+}
+
+#page-sidebar .title {
+    font-size: 110%;
+}
+
+#page-sidebar .backlink {
+    font-size: 70%;
+}
+
+#toc {
+    padding: 1em;
+}
+
+#toc ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#toc > ul > li > a {
+    display: none;
+}
+
+#toc > ul > li > ul > li {
+    margin-bottom: 1em;
+}
+
+#toc > ul > li > ul > li > ul {
+    padding-left: 1em;
+    font-size: 80%;
+}
+
+#toc > ul > li > ul > li > ul li {
+    margin-top: 0.5em;
+}
+
+#page-content {
+    /* fit nicely on ipad portrait */
+    margin-left: 3%;
+    margin-right: 3%;
+    max-width: 800px;
+    margin-top: 2em;
+    margin-bottom: 4em;
+    min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  #page-content {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #page-content {
+    margin-left: 100px;
+    margin-right: auto;
+    width: 800px;
+  }
+}
+
+
+@media print {
+    #page-sidebar {
+        display: none;
+    }
+
+    #page-content {
+        margin-top: 0;
+        margin-left: 0;
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
+
+.field-name {
+    text-align: left;
+}
+
+.section a {
+    text-decoration: none;
+}
+
+@media print {
+    .section a::after {
+        content: " <" attr(href) ">";
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+.function table {
+    border-bottom: none;
+}
+
+.function dd {
+    margin-left: 1em;
+}
+
+.function .field-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border: none;
+}
+
+.function .field-body p.last {
+    margin-bottom: 0;
+}
+
+.function .field-name {
+    padding-left: 0 !important;
+    border: none;
+    text-align: right;
+}
+
+.function .field-body ul {
+    margin-top: 0;
+    padding: 0 0 0 0;
+    list-style: none;
+}
+
+.function .field-body ul li {
+    margin-bottom: 0.5em;
+}
+
+.function .field-body .first {
+    margin-top: 0;
+}
+
+.function code {
+    font-weight: bold;
+    color: inherit !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/*.wy-side-nav-search,*/
+/*.wy-nav-top {*/
+/*background-color: #e64f3a;*/
+/*}*/
+
+/*.wy-side-nav-search .project {*/
+/*margin-bottom: 0.5em;*/
+/*font-size: 80%;*/
+/*}*/
+
+/*.wy-side-nav-search .extlink {*/
+/*margin-bottom: 0.5em;*/
+/*font-size: 70%;*/
+/*}*/
+
+/*!* don't show title in the TOC on the sidebar; it's duplicative *!*/
+/*.local-toc > ul > li > a {*/
+/*display: none;*/
+/*}*/
+
+/*!* Indent 3rd level items in sidebar *!*/
+/*.local-toc ul li ul li ul {*/
+/*margin-left: 1em;*/
+/*}*/
+
+table {
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    empty-cells: show;
+}
+
+table.hlist td {
+    vertical-align: top;
+}
+
+table.hlist ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+table.docutils {
+    border-bottom: solid 1px #ccc;
+}
+
+table.docutils td, th {
+    /*border: solid 1px #eee;*/
+    border: none;
+    border-top: solid 1px #ccc;
+    padding: 0.3em;
+    margin: 0;
+
+}
+
+.raw-reveal {
+    display: none;
+}
+
+img.image-border {
+    border: solid 1px black;
+}
+
+.line-block {
+    margin: 0.5em 0;
+}
+
+blockquote {
+    font-style: italic;
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+/*@media screen {*/
+/*body {*/
+/*margin-left: 350px;*/
+/*margin-right: 50px;*/
+/*}*/
+/*}*/
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+dt {
+    font-weight: 600;
+}
+
+pre {
+    font-family: Inconsolata, monospace;
+    font-size: 90%;
+}
+
+.highlight {
+    background-color: white;
+    border: solid 1px #ddd;
+    margin: 0.2em 0 0.4em 0;
+}
+
+.highlight pre {
+    /*margin: 1em;*/
+    margin: 0.6em;
+}
+
+code {
+    color: #E74C3C;
+    font-family: Inconsolata, monospace;
+    border: solid 1px #eee;
+    padding: 0 5px;
+    font-size: 90%;
+}
+
+pre.literal-block {
+    background-color: white;
+    border: solid 1px #ddd;
+    margin: 0.2em 0 0.4em 0;
+    /*padding: 1em;*/
+    padding: 0.6em;
+}
+
+@media print {
+    body {
+        /*margin-left: 60px;*/
+    }
+
+    code {
+        color: #500;
+        border: solid 1px #ccc;
+        font-weight: bold;
+    }
+
+    .highlight, pre.literal-block {
+        border: solid 1px #ddd;
+    }
+}
+
+.sidebar {
+    margin-left: 1.5em;
+    float: right;
+    width: 15em;
+    font-size: 90%;
+}
+
+.sidebar15x {
+    width: 18em;
+}
+
+.admonition,
+.sidebar {
+    padding: 0 1em 0.35em 1em;
+    background-color: #eaf2f7;
+}
+
+@media print {
+    .admonition,
+    .sidebar {
+        border: solid 1px #ccc;
+        border-left: solid 5px #ccc;
+    }
+}
+
+.admonition.warning {
+    background-color: #faeddc;
+}
+
+.admonition > p:nth-child(1),
+.sidebar-title {
+    font-weight: bold;
+    margin: 0 -1em -0.25em -1em;
+    padding: 0.25em 1em;
+    background-color: #7ab0ce;
+    color: white;
+}
+
+.admonition.warning > p:nth-child(1) {
+    background-color: #dba376;
+}
+
+/* add note: before title if not already there */
+.admonition.note > p:nth-child(1)::before {
+    content: "Note: ";
+}
+
+.admonition.warning > p:nth-child(1)::before {
+    content: "Warning: ";
+}
+
+cite {
+    font-weight: 600;
+}
+
+img.align-right {
+    float: right;
+}
+
+.code-block-caption {
+    font-style: italic;
+    font-size: 90%;
+    margin-bottom: 0.5em;
+}
+
+div.highlight,
+pre.literal-block {
+    max-width: 38em;
+    min-width: 39em;
+}
+
+.compare div.highlight,
+.compare pre.literal-block {
+    min-width: 20em;
+    max-width: 21em;
+}
+
+.compare23 > div:first-child div.highlight,
+.compare23 > div:first-child div.literal-block,
+.compare32 > div:last-child div.highlight,
+.compare32 > div:last-child div.literal-block
+{ min-width: 14em; max-width: 15em; }
+
+.compare23 > div:last-child div.highlight,
+.compare23 > div:last-child div.literal-block,
+.compare32 > div:first-child div.highlight,
+.compare32 > div:first-child div.literal-block
+{ min-width: 26em; max-width: 27em }
+
+.compare12 > div:first-child div.highlight,
+.compare12 > div:first-child div.literal-block,
+.compare21 > div:last-child div.highlight,
+.compare21 > div:last-child div.literal-block
+{ min-width: 12em; max-width: 13em; }
+
+.compare12 > div:last-child div.highlight,
+.compare12 > div:last-child div.literal-block,
+.compare21 > div:first-child div.highlight,
+.compare21 > div:first-child div.literal-block
+{ min-width: 28em; max-width: 29em }
+
+/*p.first.last {*/
+/*margin: 0;*/
+/*}*/
+
+/*li p {*/
+/*margin: 0;*/
+/*}*/
+
+h1 {
+    background-image: url('hb-logo.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 1em 1em;
+}
+
+/* Add spacing for code challenges, where h1 is followed by info block about challenge */
+h1 + table.field-list {
+    margin-top: 2em;
+}
+
+h2 {
+    margin-top: 2em;
+}
+
+.red {
+    color: #c00;
+    font-weight: bold;
+}
+
+.blue {
+    color: #28c;
+    font-weight: bold;
+}
+
+.purple {
+    color: #a08
+    font-weight: bold;
+}
+
+.yellow {
+    color: #bb0;
+    font-weight: bold;
+}
+
+.inv-red {
+    background-color: #c00;
+    color: #fff;
+    font-weight: bold;
+}
+
+.orange {
+    color: #f80;
+    font-weight: bold;
+}
+
+.green {
+    color: #3b3;
+    font-weight: bold;
+}
+
+.tan {
+    color: #daa520;
+    font-weight: bold;
+}
+
+.cyan {
+    color: #0cc;
+    font-weight: bold;
+}
+
+.gone {
+    color: #666;
+    text-decoration: line-through;
+}
+
+.console .highlight {
+    max-width: 45em;
+    border: none;
+}
+
+pre.literal-block.console, .console .highlight pre {
+    border: solid 1px #ddd;
+    background-color: #333;
+    color: #ddd;
+    padding: 1em;
+    border-radius: 0.4em;
+    margin: 1.5em 0;
+    max-width: 45em;
+
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+
+}
+
+/* command-lne switches */
+kbd {
+
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+
+}
+
+.console .cmd {
+    font-weight: bold;
+    color: yellow;
+}
+
+.console a {
+    color: inherit !important;
+}
+
+/* Make these darker than usual so they show up better */
+
+.console .red {
+    color: #f33;
+}
+
+.console .blue {
+    color: #4af;
+}
+
+.console .purple {
+    color: #a08;
+}
+
+.console .yellow {
+    color: #bb0
+}
+
+.console .orange {
+    color: #fc3;
+}
+
+.console .green {
+    color: #3f3;
+}
+
+.console .tan {
+    color: #daa520;
+}
+
+.console .cyan {
+    color: #0ff;
+}
+
+.console .gone {
+    color: #666;
+    text-decoration: line-through;
+}
+
+.left {
+    text-align: left;
+}
+
+/*ul.simple > li {*/
+/*margin-bottom: 0.4em;*/
+/*}*/
+
+/*ul.simple > li > ul {*/
+/*margin-top: 0.4em;*/
+/*!*font-size: 90%;*!*/
+/*}*/
+
+dd {
+    margin-bottom: 0.5em !important;
+}
+
+cite {
+    font-style: italic !important;
+    font-weight: bold;
+}
+
+.compare > div {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.compare23 > div:first-child { width: 39%; }
+.compare23 > div:last-child { width: 59%; }
+
+.compare32 > div:first-child { width: 59%; }
+.compare32 > div:last-child { width: 39%; }
+
+.compare12 > div:first-child { width: 32%; }
+.compare12 > div:last-child { width: 65%; }
+
+.compare21 > div:first-child { width: 65%; }
+.compare21 > div:last-child { width: 32%; }
+
+.hover-reveal:before {
+    content: "Hover to reveal";
+    position: absolute;
+}
+
+.hover-reveal:hover:before {
+    content: "";
+}
+
+.hover-reveal > * {
+    visibility: hidden;
+}
+
+.topic-title {
+    margin-top: 0;
+}
+
+.hover-reveal {
+    border: dashed 1px #999;
+    background-color: #eee;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.hover-reveal:hover > * {
+    visibility: visible;
+}
+
+.hover-reveal:hover {
+    background-color: transparent;
+}
+
+@media print {
+    .hover-reveal > * {
+        visibility: visible;;
+    }
+
+    .hover-reveal:before {
+        content: "";
+    }
+
+    .hover-reveal {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 1em;
+    }
+
+    .noprint {
+        display: none !important;
+    }
+
+    .simple {
+        /* this seems to keep any list from breaking; yuck */
+        /* page-break-inside: avoid; */
+    }
+
+    .simple li,
+    .simple ol {
+        page-break-inside: avoid;
+    }
+
+    .console {
+        background-color: #F5F5F5 !important;
+        color: #8C8C8C !important;
+    }
+
+    .console .cmd {
+        color: black;
+    }
+
+}
+
+/* meant for print */
+/* no space for top h2 */
+#page-content > .section > .section:first-of-type h2 {
+    margin-top: 1em;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    padding-left: 1.5em;
+    list-style: disc;
+}
+
+ul.simple li {
+    margin: 0.5em 0;
+}
+
+.hlist ul {
+    margin-right: 5em;
+}
+
+dt {
+    margin-bottom: 0.25em;
+}
+
+dd {
+    margin-left: 1.5em;
+}
+
+dd > p.first {
+    margin-top: 0;
+}
+
+.td-center th:not(:first-child),
+.td-center td:not(:first-child) {
+    text-align: center;
+}
+
+.td-right th:not(:first-child),
+.td-right td:not(:first-child) {
+    text-align: right;
+}
