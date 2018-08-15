@@ -1,0 +1,613 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <!--<title>C Crash Course &mdash; Hackbright Fellowship</title>-->
+  <title>C Crash Course</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="_static/revealjs/css/reveal.css"/>
+  <link rel="stylesheet" href="_static/revealjs/css/theme/white.css" id="theme"/>
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+  <link rel="stylesheet" href="_static/revealjs-hackbright.css"/>
+
+</head>
+<body>
+  <div class="reveal">
+
+    <footer id="slide-footer"></footer>
+
+    <div class="slides">
+      <section>
+        <h2>C Crash Course</h2>
+
+        <div class="event"></div>
+      </section>
+
+      
+  <section  ><section>
+<h2>Hello World</h2>
+</section><section  ><h3>Hello World</h3>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">hello.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><cite>printf</cite> is &#8220;imported&#8221; from <em>stdio</em></li>
+<li><cite>main</cite> is special</li>
+<li><cite>main</cite> takes <code class="docutils literal"><span class="pre">void</span></code></li>
+<li><cite>main</cite> returns <cite>int</cite></li>
+<li>{ }</li>
+<li>;</li>
+</ul>
+</section><section  ><h3>Running at command line</h3>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc hello.c
+$ ./a.out
+Hello World
+$
+</pre></div>
+</div>
+<p>Newline must be explicit</p>
+</section><section  ><h3>Comparison</h3>
+<div class="compare docutils container">
+<div class="docutils container">
+<p>Python</p>
+<ul class="simple">
+<li>dynamic typing</li>
+<li>compiles to byte code</li>
+<li>run by virtual machine</li>
+</ul>
+</div>
+<div class="docutils container">
+<p>C</p>
+<ul class="simple">
+<li>static typing</li>
+<li>compiles to machine code</li>
+<li>run by CPU</li>
+</ul>
+</div>
+</div>
+<p>Standard implementation of Python - &#8220;CPython&#8221; - is written in C.</p>
+</section></section><section  ><section>
+<h2>Basic Syntax</h2>
+</section><section  ><h3>Variables</h3>
+<ul class="simple">
+<li>lower snake case</li>
+<li>leading underscore for internal use</li>
+<li><strong>fixed</strong> memory location</li>
+<li>But how much memory?</li>
+</ul>
+</section><section  ><h3>Types</h3>
+<p>Basic Types</p>
+<ul class="simple">
+<li><cite>char</cite> - one byte, ie, small integer</li>
+<li><cite>int</cite> - 4 bytes (Python3 <cite>int</cite> has arbitrary size)</li>
+<li><cite>float</cite> - 4 bytes</li>
+<li><cite>double</cite> - double precision floating point</li>
+</ul>
+<p>Modifiers for integer types</p>
+<ul class="simple">
+<li><cite>signed</cite> - negative to positive</li>
+<li><cite>unsigned</cite> - zero to positive</li>
+</ul>
+<p>Exact sizes and ranges somewhat platform dependent :(</p>
+</section><section  ><h3>Types</h3>
+<p>Because type corresponds to memory size, be careful to stay within bounds:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(low</span> <span class="pre">+</span> <span class="pre">high)</span> <span class="pre">/</span> <span class="pre">2</span></code> may give gibberish</li>
+<li><code class="docutils literal"><span class="pre">low</span> <span class="pre">+</span> <span class="pre">(high</span> <span class="pre">-</span> <span class="pre">low)</span> <span class="pre">/</span> <span class="pre">2</span></code> is safe</li>
+<li>This bug went undetected in Java&#8217;s binary search until 2006!</li>
+<li><cite>sizeof</cite> operator gives size in bytes</li>
+</ul>
+</section><section  ><h3>Literals</h3>
+<p>a <cite>char</cite> is an integer but written as a <em>single</em> quoted character</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'0'</span></code> is same as 48 (ASCII value)</li>
+<li><code class="docutils literal"><span class="pre">'0'</span></code> is conventional and preferred</li>
+<li><cite>char</cite> most often used for textual stuff, not math</li>
+<li>special characters begin with , e.g. <code class="docutils literal"><span class="pre">'\\n'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'\0'</span></code> is null character (equal to 0)</li>
+</ul>
+</section><section  ><h3>Literals</h3>
+<p>strings are denoted by <em>double</em> quotes</p>
+<ul class="simple">
+<li>stored in memory as array of characters</li>
+<li><code class="docutils literal"><span class="pre">'\0'</span></code> at the end</li>
+<li><code class="docutils literal"><span class="pre">&quot;a&quot;</span></code> is <strong>not</strong> same as <code class="docutils literal"><span class="pre">'a'</span></code> !</li>
+</ul>
+</section><section  ><h3>Literals</h3>
+<p><cite>enum</cite> for autoincrementing constants</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">enum.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">enum</span> <span class="n">fruits</span> <span class="p">{</span> <span class="n">APPLE</span><span class="p">,</span> <span class="n">BERRY</span><span class="p">,</span> <span class="n">CHERRY</span> <span class="p">};</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">APPLE</span><span class="p">,</span> <span class="n">BERRY</span><span class="p">,</span> <span class="n">CHERRY</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc enum.c
+$ ./a.out
+0 1 2
+</pre></div>
+</div>
+<p>(You can also explicitly assign values.)</p>
+</section><section  ><h3>Declarations</h3>
+<p>Variables must be declared (and initialized) before use.</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">int</span> <span class="pre">x,</span> <span class="pre">y;</span></code>
+<code class="docutils literal"><span class="pre">char</span> <span class="pre">msg[]</span> <span class="pre">=</span> <span class="pre">&quot;hello&quot;;</span></code>
+<code class="docutils literal"><span class="pre">const</span> <span class="pre">double</span> <span class="pre">pi</span> <span class="pre">=</span> <span class="pre">3.1415;</span></code></div></blockquote>
+<p><cite>const</cite>: value can&#8217;t change (compiler can enforce)</p>
+<p>Global variables</p>
+<ul class="simple">
+<li>initialized exactly once</li>
+<li><em>may</em> need to be declared within function with <cite>extern</cite> keyword</li>
+</ul>
+<p>Local variables</p>
+<ul class="simple">
+<li>initialized wth each function call</li>
+<li>value does not persist</li>
+</ul>
+</section><section  ><h3>Operators</h3>
+<p>Arithmetic Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code>, <code class="docutils literal"><span class="pre">%</span></code></li>
+<li><code class="docutils literal"><span class="pre">/</span></code> is integer division</li>
+</ul>
+<p>Relational Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&gt;</span></code>, <code class="docutils literal"><span class="pre">&gt;=</span></code>, <code class="docutils literal"><span class="pre">&lt;</span></code>, <code class="docutils literal"><span class="pre">&lt;=</span></code></li>
+<li><code class="docutils literal"><span class="pre">==</span></code>, <code class="docutils literal"><span class="pre">!=</span></code></li>
+</ul>
+<p>Logical Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&amp;&amp;</span></code> (and), <code class="docutils literal"><span class="pre">||</span></code> (or), <code class="docutils literal"><span class="pre">!</span></code> (not)</li>
+</ul>
+</section><section  ><h3>Operators</h3>
+<ul class="simple">
+<li>Boolean expression evaluates to 1 (true) or 0 (false)</li>
+<li><code class="docutils literal"><span class="pre">!</span></code> turns 0 to 1, and nonzero to 0</li>
+</ul>
+<p>compound expressions separated by <code class="docutils literal"><span class="pre">&amp;&amp;</span></code>/<code class="docutils literal"><span class="pre">||</span></code></p>
+<ul class="simple">
+<li>evaluated left to right</li>
+<li>with short circuit</li>
+</ul>
+<p><strong>not</strong> true in general</p>
+<ul class="simple">
+<li>in <code class="docutils literal"><span class="pre">f(x)</span> <span class="pre">+</span> <span class="pre">g(x)</span></code>, <cite>f</cite> or <cite>g</cite> may be evaluated first</li>
+</ul>
+</section><section  ><h3>Type Casting</h3>
+<p>Usually, C automatically casts type</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1.0</span></code> is a double float</li>
+<li><code class="docutils literal"><span class="pre">sqrt(2)</span></code> works</li>
+</ul>
+<p>To explicitly cast:</p>
+<blockquote>
+<div><p><cite>(type) expression</cite></p>
+<p>e.g., <code class="docutils literal"><span class="pre">(float)</span> <span class="pre">5</span> <span class="pre">/</span> <span class="pre">2</span></code> evaluates to 2.5</p>
+</div></blockquote>
+</section><section  ><h3>Increment / Decrement</h3>
+<p><code class="docutils literal"><span class="pre">++</span></code> increases variable by 1</p>
+<p><code class="docutils literal"><span class="pre">--</span></code> decresses variable by 1</p>
+<p>Can be either prefix or postfix</p>
+<ul class="simple">
+<li>prefix: change value then get it</li>
+<li>postfix: get value then change it</li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">prefix_postfix.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">char</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">++</span><span class="n">x</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">++</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc prefix_postfix.c
+$ ./a.out
+b
+b
+b
+c
+$
+</pre></div>
+</div>
+<p>Often idiomatic (but confusing) to increment within expression.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">ones.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ones</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll">    <span class="n">ones</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="o">//</span> <span class="o">++</span><span class="n">i</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">work</span>
+</span>  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ones</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc ones.c
+$ ./a.out
+0: 1
+1: 1
+2: 1
+$
+</pre></div>
+</div>
+</section><section  ><h3>Assignment</h3>
+<p>Assignment Operators</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">3</span></code> same as <code class="docutils literal"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">3</span></code></li>
+<li>similarly, <code class="docutils literal"><span class="pre">-=</span></code>, <code class="docutils literal"><span class="pre">*=</span></code>, <code class="docutils literal"><span class="pre">/=</span></code>, etc.</li>
+<li>in Python, <code class="docutils literal"><span class="pre">+=</span></code> is <strong>not</strong> same as reassignment!</li>
+</ul>
+<p>Assignment Expressions</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">printf(&quot;%d\n&quot;,</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">42)</span></code> outputs 42</li>
+<li>common pattern: <code class="docutils literal"><span class="pre">while</span> <span class="pre">((char</span> <span class="pre">=</span> <span class="pre">getchar())</span> <span class="pre">!=</span> <span class="pre">EOF)</span></code></li>
+<li>nasty bug: <code class="docutils literal"><span class="pre">if</span> <span class="pre">(x=1)</span></code> <strong>always</strong> true</li>
+<li>coming to Python 3.8 (<code class="docutils literal"><span class="pre">:=</span></code>)</li>
+</ul>
+</section></section><section  ><section>
+<h2>Control Flow</h2>
+</section><section  ><h3>Statement and Block</h3>
+<ul class="simple">
+<li>code is made of statements</li>
+<li>each statement ended by <code class="docutils literal"><span class="pre">;</span></code></li>
+<li>block is multiple statements within <code class="docutils literal"><span class="pre">{</span> <span class="pre">}</span></code></li>
+<li>block is also a statement</li>
+<li>no semicolon after block</li>
+</ul>
+</section><section  ><h3>Conditionals</h3>
+<p>General Syntax</p>
+<pre class="literal-block">
+if (<em>expression</em>)
+    <em>statement</em>
+
+else if (<em>expression</em>)
+    <em>statement</em>
+
+...
+
+else
+    <em>statement</em>
+</pre>
+<ul class="simple">
+<li>evalutation halts when an expression is true (nonzero)</li>
+<li><code class="docutils literal"><span class="pre">else</span></code> is optional</li>
+</ul>
+<p>Note that <code class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></code> is not a separate keyword like <code class="docutils literal"><span class="pre">elif</span></code>.
+The <code class="docutils literal"><span class="pre">if</span></code> simply begins another conditional.</p>
+</section><section  ><h3>Switch</h3>
+<pre class="literal-block">
+switch (<em>expression</em>) {
+    case <em>const-expr</em>: <em>statements</em>
+    case <em>const-expr</em>: <em>statements</em>
+    ...
+    default: <em>statements</em>
+}
+</pre>
+<ul class="simple">
+<li>expression must be integer valued</li>
+<li>case values must be unique</li>
+<li>optional <code class="docutils literal"><span class="pre">default</span></code> executes if no condition is met</li>
+<li>execution starts where expression matches value</li>
+<li>continues <strong>until</strong> end or <code class="docutils literal"><span class="pre">break</span></code></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">case.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">switch</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">case</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;one</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="n">case</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;two</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="n">case</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;three</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="n">case</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;four</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc case.c
+$ ./a.out
+two
+three
+$
+</pre></div>
+</div>
+</section><section  ><h3>Loops</h3>
+<p><cite>while</cite> loop runs as long as expression is nonzero</p>
+<pre class="literal-block">
+while (<em>expression</em>)
+    <em>statement</em>
+</pre>
+<p><cite>for</cite> loop</p>
+<pre class="literal-block">
+for (expr1; expr2; expr3)
+    <em>statement</em>
+</pre>
+<p>is equivalent to</p>
+<pre class="literal-block">
+<em>expr1</em>;
+while (<em>expr2</em>) {
+    <em>statement</em>
+    <em>expr3</em>
+}
+</pre>
+<p><cite>for</cite> loop is idiomatic for iterating thru array</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">for(;;){</span> <span class="pre">...</span> <span class="pre">}</span></code> is an infinte loop!</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">do-while</span></code> loop</p>
+<pre class="literal-block">
+do
+    <em>statement</em>
+while (<em>expression</em>);
+</pre>
+<p><cite>do-while</cite> is relatively uncommon</p>
+</section><section  ><h3>Break / Continue</h3>
+<p>Same as Python! Within a loop, <code class="docutils literal"><span class="pre">break</span></code> immediately exits the loop,
+and <code class="docutils literal"><span class="pre">continue</span></code> goes back to the top of the loop.</p>
+</section><section  ><h3>Goto</h3>
+<p>You can label code and jump to a label.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">goto.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">goto</span> <span class="n">yay</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;hello</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+
+<span class="n">yay</span><span class="p">:</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;world</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc goto.c
+$ ./a.out
+world
+$
+</pre></div>
+</div>
+<p>&#8220;Although we are not dogmatic about the matter, it does seem
+that <cite>goto</cite> statements should be used rarely, if at all.&#8221;</p>
+<p>&#8211; K&amp;R</p>
+</section></section><section  ><section>
+<h2>Functions</h2>
+</section><section  ><h3>General Structure</h3>
+<pre class="literal-block">
+<em>return-type</em> <em>name*(*parameters</em>) {
+    <em>declarations and statements</em>
+}
+</pre>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">return</span></code> returns value (or nothing)</li>
+<li>if no <code class="docutils literal"><span class="pre">return</span></code> then returns nothing</li>
+<li><code class="docutils literal"><span class="pre">void</span></code> denotes no return or no parameter</li>
+<li><strong>no</strong> nested functions in C, ie, not first class object</li>
+</ul>
+</section><section  ><h3>Multiple Files</h3>
+<p>C program is a bunch of variable declarations and functions.
+Source code can be split among multiple files.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">half_main.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">double</span> <span class="n">half</span><span class="p">(</span><span class="n">double</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">half</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">half.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">half</span><span class="p">(</span><span class="n">double</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc half_main.c half.c
+$ ./a.out
+2.500000
+$
+</pre></div>
+</div>
+<p>The function prototype <code class="docutils literal"><span class="pre">double</span> <span class="pre">half(double)</span></code> is necessary, otherwise the
+compiler seeing a function used for the first time assumes it has
+return type <code class="docutils literal"><span class="pre">int</span></code>.</p>
+<p>This the main purpose of <em>header</em> (.h) files - get all the prototypes and
+other global declarations out of the way.</p>
+</section><section  ><h3>Global Variables</h3>
+<ul class="simple">
+<li>AKA <em>external</em> variables</li>
+<li>defined outside of any function</li>
+<li>useful for shared information among functions</li>
+<li>use with caution, for the usual reasons</li>
+</ul>
+</section><section  ><h3>Scope</h3>
+<p>Where can a variable be used?</p>
+<ul class="simple">
+<li>local (&#8220;automatic&#8221;) variable: within the same function</li>
+<li>parameters become local variables</li>
+<li>global (&#8220;external&#8221;) variable: within the same file</li>
+<li><code class="docutils literal"><span class="pre">extern</span></code> declaration may be necessary</li>
+<li>when local and global variable has same name, local wins</li>
+</ul>
+</section><section  ><h3>Static Variables</h3>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">static</span></code> declaration before global variable: visible within file only</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">static</span></code> local variable: persist between function calls</li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">counter.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">counter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">static</span> <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">());</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="console highlight-default"><div class="highlight"><pre><span></span>$ gcc counter.c
+$ ./a.out
+1
+2
+3
+$
+</pre></div>
+</div>
+</section><section  ><h3>Block Scope</h3>
+<p>Variable can be local to <em>any</em> block, not just function block.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">block_scope.c</span></div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gcc block_scope.c
+$ ./a.out
+3
+2
+$
+</pre></div>
+</div>
+<p>Probably should exploit this sparingly...</p>
+</section><section  ><h3>Initialization</h3>
+<ul class="simple">
+<li>global variables default to zero</li>
+<li>local vaiables must be initialized, or have garbage values</li>
+</ul>
+<p>Array can be initialized with a literal</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">nums[]</span> <span class="pre">=</span> <span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3};</span></code></li>
+</ul>
+<p>Strings are arrays of characters</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">char</span> <span class="pre">message[]</span> <span class="pre">=</span> <span class="pre">&quot;hello&quot;;</span></code></li>
+</ul>
+<p>is short for</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">char</span> <span class="pre">message[]</span> <span class="pre">=</span> <span class="pre">{'h',</span> <span class="pre">'e',</span> <span class="pre">'l',</span> <span class="pre">'l',</span> <span class="pre">'o',</span> <span class="pre">'\0'};</span></code></li>
+</ul>
+<h4>Recursion</h4>
+<p>content</p>
+</section></section><section  ><section>
+<h2>Pointers and Arrays</h2>
+</section></section><section  ><section>
+<h2>Structures</h2>
+</section></section><section  ><section>
+<h2>I/O</h2>
+</section></section><section  ><section>
+<h2>Operating System</h2>
+</section></section>
+
+
+    </div>
+  </div>
+
+<script src="_static/revealjs/lib/js/head.min.js"></script>
+<script src="_static/revealjs/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    maxScale: 5,
+    width: 1280,
+    height: 800,
+    margin: 0.1,
+    transition: 'slide',
+    dependencies: [
+      {src: "_static/revealjs/plugin/notes/notes.js", async: true},
+    ]
+  });
+  // External links should open in new window
+  var externalLinks = document.getElementsByClassName("external");
+  for (var i = 0; i < externalLinks.length; i++)
+    externalLinks[i].setAttribute('target', '_blank');
+</script>
+
+</body>
+</html>
