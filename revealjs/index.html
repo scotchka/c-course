@@ -148,7 +148,7 @@ $
 <li><code class="docutils literal"><span class="pre">'0'</span></code> is same as 48 (ASCII value)</li>
 <li><code class="docutils literal"><span class="pre">'0'</span></code> is conventional and preferred</li>
 <li><cite>char</cite> most often used for textual stuff, not math</li>
-<li>special characters begin with , e.g. <code class="docutils literal"><span class="pre">'\\n'</span></code></li>
+<li>special characters begin with , e.g. <code class="docutils literal"><span class="pre">'\n'</span></code></li>
 <li><code class="docutils literal"><span class="pre">'\0'</span></code> is null character (equal to 0)</li>
 </ul>
 </section><section  ><h3>Literals</h3>
@@ -470,7 +470,7 @@ that <cite>goto</cite> statements should be used rarely, if at all.&#8221;</p>
 <h2>Functions</h2>
 </section><section  ><h3>General Structure</h3>
 <pre class="literal-block">
-<em>return-type</em> <em>name*(*parameters</em>) {
+<em>return-type</em> <em>name</em>(<em>parameters</em>) {
     <em>declarations and statements</em>
 }
 </pre>
@@ -1162,7 +1162,7 @@ $
 <ul class="simple">
 <li><cite>fopen</cite> returns pointer to FILE in read mode</li>
 <li><cite>getc</cite> gets next character from file</li>
-<li>&#8216;putc` sends character to file</li>
+<li><cite>putc</cite> sends character to file</li>
 <li><cite>stdin</cite>, <cite>stdout</cite>, <cite>stderr</cite> are included file pointers</li>
 <li>STDIN, STDOUT, STDERR are &#8220;file-like objects&#8221; provided by OS</li>
 <li>limit on number of open files, so <cite>fclose</cite> when done</li>
@@ -1302,8 +1302,6 @@ system calls, which are implemented by OS.</p>
 <li>operating system</li>
 <li>compilers!</li>
 </ul>
-</section><section  ><h3>Feedback!</h3>
-<p><a class="reference external" href="http://feedback.hackbrightacademy.com/">http://feedback.hackbrightacademy.com/</a></p>
 </section></section>
 
 
